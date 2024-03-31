@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "01_shopping_recipe_project": {
+    "00_understanding-basics": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/01_shopping_recipe_project",
+            "outputPath": "dist/00_understanding-basics",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -35,7 +35,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -68,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "01_shopping_recipe_project:build:production"
+              "buildTarget": "00_understanding-basics:build:production"
             },
             "development": {
-              "buildTarget": "01_shopping_recipe_project:build:development"
+              "buildTarget": "00_understanding-basics:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "01_shopping_recipe_project:build"
+            "buildTarget": "00_understanding-basics:build"
           }
         },
         "test": {

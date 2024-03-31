@@ -1,0 +1,35 @@
+<!-- <p>recipe-list works!</p> -->
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-success">New Recipe</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <a 
+            href="#" 
+            class="list-group-item bg-light pt-2 px-2 clearfix" 
+            *ngFor="let recipe of recipes">
+            <div class="float-start">
+                <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
+                <p class="list-group-item-text">{{ recipe.description }}</p>
+            </div>
+            <span class="float-end">
+                <!-- Method 1 - Using String interpolation -->
+                <!-- <img 
+                    src="{{ recipe.imagePath }}" 
+                    alt="{{ recipe.name }}" 
+                    class="img-fluid" 
+                    style="max-height: 250px;"> -->
+                <!-- Method 2 - Using property binding -->
+                <img 
+                    [src]="recipe.imagePath" 
+                    alt="{{ recipe.name }}" 
+                    class="img-fluid" 
+                    style="max-height: 50px;">
+            </span>
+        </a>
+        <app-recipe-item></app-recipe-item>
+    </div>
+</div>
+
