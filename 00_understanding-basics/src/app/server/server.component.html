@@ -1,0 +1,9 @@
+<!-- <p>server works!</p> -->
+<!-- Here, we are binding to a property of the directive -->
+<!-- This ngStyle property expects to get a JavaScript object in key-value pairs format -->
+<!-- You can use 'background-color' or just backgroundColor in camel casing -->
+<p 
+    [ngStyle]="{'background-color': getColor()}"
+    [ngClass]="{online: serverStatus === 'online'}">
+    {{'Server'}} with ID {{serverId}} is {{getServerStatus()}}
+</p>

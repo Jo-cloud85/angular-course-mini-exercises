@@ -1,0 +1,51 @@
+<!-- <p>servers works!</p> -->
+<label>Server Name</label>
+<!-- Using event binding -->
+<!-- <input
+    type="text"
+    class="form-control"
+    (input)="onUpdateServerName($event)"> -->
+
+<!-- Using two-way binding -->
+<input
+    type="text"
+    class="form-control"
+    [(ngModel)]="serverName">
+
+<!-- <p>{{ serverName }}</p> -->
+
+<button 
+    class="btn btn-primary" 
+    [disabled]="!allowNewServer"
+    (click)="onCreateServer()">
+    Add Server
+</button>
+<!-- Using String interpolation -->
+<!-- <p>{{allowNewServer}}</p> -->
+
+<!-- Using property binding -->
+<!-- <p [innerText]>"allowNewServer"</p> -->
+
+<!-- <p>{{ serverCreationStatus }}</p> -->
+
+<!-- Basically it means if serverCreated is true, show the message -->
+<!-- Using old way - before Angular 17 -->
+<!-- <p *ngIf="serverCreated; else noServer">Server was created, server name is {{ serverName }}</p>
+<ng-template #noServer>
+    <p>No server was created</p>
+</ng-template> -->
+
+<!-- Using new way - after Angular 17 -->
+@if (serverCreated) {
+    <p>Server was created, server name is {{ serverName }}</p>
+} @else {
+    <p>No server was created</p>
+}
+
+<!-- Using old way - before Angular 17 -->
+<!-- <app-server *ngFor="let server of servers"></app-server> -->
+
+<!-- Using new way - after Angular 17 -->
+@for (server of servers; track server) {
+    <app-server></app-server>
+}
