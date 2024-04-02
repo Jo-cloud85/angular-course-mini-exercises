@@ -2,9 +2,9 @@
 <div class="card">
     <div class="card-header">{{ element.name }}</div>
     <div class="card-body">
-        <p>
-        <strong *ngIf="element.type === 'server'" style="color: red">{{ element.content }}</strong>
-        <em *ngIf="element.type === 'blueprint'">{{ element.content }}</em>
-        </p>
+        <!-- ng-content is a directive just using this element-like selector and this
+        serves as a hook that you can place in your component to mark the place for 
+        Angular where it should add any content it finds between the opening and closing tag inside the app.component.html file -->
+        <ng-content></ng-content>
     </div>
 </div>

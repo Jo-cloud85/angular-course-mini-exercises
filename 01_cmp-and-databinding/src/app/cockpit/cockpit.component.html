@@ -3,15 +3,35 @@
     <div class="col-xs-12">
         <p>Add new Servers or blueprints!</p>
         <label>Server Name</label>
-        <input type="text" class="form-control" [(ngModel)]="newServerName">
+        <!-- Using two-way binding -->
+        <!-- <input type="text" class="form-control" [(ngModel)]="newServerName"> -->
+
+        <!-- Using local reference -->
+        <!-- It is a nice feature to get access to some elements in your template and then use that either directly in the template or you could also output the server name
+        input value -->
+        <input 
+            type="text" 
+            class="form-control" 
+            #serverNameInput
+        >
         <label>Server Content</label>
-        <input type="text" class="form-control" [(ngModel)]="newServerContent">
+         <!-- Using two-way binding -->
+        <!-- <input type="text" class="form-control" [(ngModel)]="newServerContent"> -->
+
+         <!-- Using local reference -->
+        <input 
+            type="text" 
+            class="form-control" 
+            #serverContentInput
+        >
         <br>
+        <!-- If you use local reference, then you need to put in the reference inside
+        you methods, in this case onAddServer(serverNameInput) -->
         <button
         class="btn btn-primary"
-        (click)="onAddServer()">Add Server</button>
+        (click)="onAddServer(serverNameInput)">Add Server</button>
         <button
         class="btn btn-primary"
-        (click)="onAddBlueprint()">Add Server Blueprint</button>
+        (click)="onAddBlueprint(serverNameInput)">Add Server Blueprint</button>
     </div>
 </div>
