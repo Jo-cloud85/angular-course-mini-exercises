@@ -1,6 +1,7 @@
 <!-- <p>server-element works!</p> -->
 <div class="card">
-    <div class="card-header">{{ element.name }}</div>
+    <!-- <div class="card-header">{{ element.name }}</div> -->
+    <div class="card-header" #heading>{{ name }}</div>
     <div class="card-body">
         <!-- ng-content is a directive just using this element-like selector and this
         serves as a hook that you can place in your component to mark the place for 

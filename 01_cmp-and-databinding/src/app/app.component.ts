@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   serverElements = [{
     type: 'server', 
     name: 'Testserver', 
@@ -26,6 +27,16 @@ export class AppComponent {
       name: blueprintData.serverName,
       content: blueprintData.serverContent
     });
+  }
+
+  onChangeFirst() {
+    this.serverElements[0].name='Changed';
+  }
+
+  /* When this method got called, ngFor re-ran and did not render the 1st element therefore
+  it was removed from the DOM, and hence the component hook - ngOnDestroy was called. */
+  onDestroyFirst() {
+    this.serverElements.splice(0,1);
   }
 }
 
