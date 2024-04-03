@@ -7,34 +7,12 @@
 <hr>
 <div class="row">
     <div class="col-12">
-        <a 
-            href="#" 
-            class="list-group-item bg-light pt-2 px-2 clearfix" 
-            *ngFor="let recipe of recipes"
-        >
-            <div class="float-start">
-                <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
-                <p class="list-group-item-text">{{ recipe.description }}</p>
-            </div>
-            <span class="float-end">
-                <!-- Method 1 - Using String interpolation -->
-                <!-- <img 
-                    src="{{ recipe.imagePath }}" 
-                    alt="{{ recipe.name }}" 
-                    class="img-fluid" 
-                    style="max-height: 50px;"
-                > -->
-
-                <!-- Method 2 - Using property binding -->
-                <img 
-                    [src]="recipe.imagePath" 
-                    alt="{{ recipe.name }}" 
-                    class="img-fluid" 
-                    style="max-height: 50px;"
-                >
-            </span>
-        </a>
-        <app-recipe-item></app-recipe-item>
+        <!-- The recipeItem is simply the recipe property in the recipe-item component
+        we're placing this on. -->
+        <app-recipe-item
+            *ngFor="let recipeEl of recipes"
+            [recipe]="recipeEl"
+            (recipeSelected)="onRecipeSelected(recipeEl)"
+        ></app-recipe-item>
     </div>
 </div>
-
