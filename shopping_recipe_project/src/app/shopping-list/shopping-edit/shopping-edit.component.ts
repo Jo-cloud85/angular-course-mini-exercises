@@ -7,9 +7,14 @@ import { Ingredient } from '../../shared/ingredient.model';
   styleUrl: './shopping-edit.component.css'
 })
 export class ShoppingEditComponent {
-  @ViewChild('nameInput') nameInputRef: ElementRef;
-  @ViewChild('amountInput') amountInputRef: ElementRef;
-  @Output() ingredientAdded = new EventEmitter<Ingredient>();
+  @ViewChild('nameInput') 
+  nameInputRef: ElementRef;
+
+  @ViewChild('amountInput') 
+  amountInputRef: ElementRef;
+
+  @Output() 
+  ingredientAdded = new EventEmitter<Ingredient>();
 
   onAddItem() {
     const ingName = this.nameInputRef.nativeElement.value;

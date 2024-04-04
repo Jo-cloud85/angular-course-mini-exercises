@@ -12,8 +12,11 @@ export class RecipeItemComponent{
   get this recipe froom outside. So we use the @Input() which allows us to bind this
   component property from outside. */
 
-  @Input() recipe: Recipe;
-  @Output() recipeSelected = new EventEmitter<void>();
+  @Input() 
+  recipe: Recipe;
+  
+  @Output() 
+  recipeSelected = new EventEmitter<void>();
 
   onSelected() {
     this.recipeSelected.emit();
