@@ -20,4 +20,17 @@ export class ShoppingListService {
         this.ingredients.push(ingredient);
         this.ingredientsChanged.emit(this.ingredients.slice());
     }
+
+    addIngredients(ingredients: Ingredient[]) {
+        /* While there is technically nothing wrong with looping through, we are emmiting a lot 
+        of events unnecessarily. */
+        // for(let ingredient of ingredients) {
+        //     this.addIngredient(ingredient);
+        // }
+
+        // Using push & spread operator to add ingredients to the ingredients array
+        this.ingredients.push(...ingredients);
+        // And then pass a copy of it using slice()
+        this.ingredientsChanged.emit(this.ingredients);
+    }
 }
