@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Recipe } from '../../recipe.model';
+import { RecipeService } from '../../receipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -11,14 +12,11 @@ export class RecipeItemComponent{
   /* Initially, this is not defined i.e. no value assigned to it because I want to 
   get this recipe froom outside. So we use the @Input() which allows us to bind this
   component property from outside. */
+  @Input() recipe: Recipe;
 
-  @Input() 
-  recipe: Recipe;
-  
-  @Output() 
-  recipeSelected = new EventEmitter<void>();
+  constructor(private recipeService: RecipeService) { }
 
   onSelected() {
-    this.recipeSelected.emit();
+    this.recipeService.recipeSelected.emit(this.recipe);
   }
 }

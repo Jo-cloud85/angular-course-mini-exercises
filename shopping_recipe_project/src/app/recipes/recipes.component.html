@@ -1,9 +1,7 @@
 <div class="row">
     <div class="col-md-5">
         <!-- Rmb, $event is the data we passed with an event -->
-        <app-recipe-list
-            (recipeWasSelected)="selectedRecipe=$event"
-        ></app-recipe-list>
+        <app-recipe-list></app-recipe-list>
     </div>
     <div class="col-md-7">
         <!-- Here, we use *ngIf because I only want to display it if selectedRecipe is set. -->
