@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  /* So basically you have 2 ways of adding query parameters and fragments to our route. 
+    - via routerLink as seen in servers.component.html 
+    - via router.navigate as demonstarted below. */
+  onLoadServer(id: number) {
+    this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit:'1'}, fragment: 'loading'});
+  }
 }
