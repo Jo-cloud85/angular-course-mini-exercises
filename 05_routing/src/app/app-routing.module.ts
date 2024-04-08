@@ -9,16 +9,33 @@ import { ServersComponent } from './servers/servers.component';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users.component';
 
+import { canActivateChildGuard } from './auth-guard.service';
+import { serverResolver } from './server-resolver.service';
+// import { canDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
+
  // ** is the wildcard meaning catch all possible unknown paths - must be the last one
  const appRoutes: Routes = [
   { path: '', component: HomeComponent }, 
   { path: 'users', component: UsersComponent, children: [
-    { path: ':id/:name', component: UserComponent }
-  ] },
-  { path: 'servers', component: ServersComponent, children: [
-    { path: ':id', component: ServerComponent },
-    { path: ':id/edit', component: EditServerComponent }
-  ] },
+      { path: ':id/:name', component: UserComponent }
+    ] 
+  },
+  {
+    path: 'servers',
+    // canActivate: [ canActivateGuard ],
+    canActivateChild: [ canActivateChildGuard ],
+    component: ServersComponent,
+    children: [{ 
+      path: ':id', 
+      component: ServerComponent, 
+      resolve: { server: serverResolver } 
+    },
+    { 
+      path: ':id/edit', 
+      component: EditServerComponent, 
+      // canDeactivate: [ canDeactivateGuard ] 
+    }]
+  },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/not-found' }
 ]
