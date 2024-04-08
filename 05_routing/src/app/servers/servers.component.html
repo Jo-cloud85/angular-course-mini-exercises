@@ -3,7 +3,7 @@
     <div class="list-group">
       <a
         [routerLink]="['/servers', server.id]"
-        [queryParams]="{'allowEdit': 1}"
+        [queryParams]="{allowEdit: server.id === 3 ? '1' : '0'}"
         fragment="loading"
         href="#"
         class="list-group-item"
@@ -13,9 +13,12 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <app-edit-server></app-edit-server>
+    <!-- Now that we have child routes, we have to add this router-outlet here that adds a 
+    new hook which will be used on all child routes off the route being loaded on the service
+    component. So all child routes will be loaded in this router out of place now. -->
+    <router-outlet></router-outlet>
+    <!-- <app-edit-server></app-edit-server>
     <hr>
-    <!-- <app-server></app-server> -->
+    <app-server></app-server> -->
   </div>
 </div>
-

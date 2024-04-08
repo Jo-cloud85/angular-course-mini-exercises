@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-server',
@@ -12,7 +12,8 @@ export class ServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
 
   constructor(private serversService: ServersService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     /* You need to add a '+' because when we retrieve the id from the URL, it will always be a string because our whole URL is simply just text. The '+' helps to convert it to a number. And if you rmb, the id in the servers.service.ts is number, not string. */
@@ -24,5 +25,9 @@ export class ServerComponent implements OnInit {
           this.server = this.serversService.getServer(+params['id']);
         }
     )
+  }
+
+  onEdit() {
+    this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'})
   }
 }

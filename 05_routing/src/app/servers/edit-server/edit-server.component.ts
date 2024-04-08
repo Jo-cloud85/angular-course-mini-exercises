@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
@@ -13,6 +13,7 @@ export class EditServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
   serverName = '';
   serverStatus = '';
+  allowEdit = false;
 
   constructor(private serversService: ServersService,
               private route: ActivatedRoute) { }
@@ -28,7 +29,12 @@ export class EditServerComponent implements OnInit {
     /* The alternative of course, is to use the route and have queryParam and fragment as an 
     observable and subscribe to them respectively. This will allow you to react to react to 
     change in query parameters. */
-    this.route.queryParams.subscribe();
+    this.route.queryParams
+      .subscribe(
+        (queryParams: Params) => {
+          this.allowEdit = queryParams['allowEdit'] === '1' ? true : false;
+        }
+    );
     this.route.fragment.subscribe();
 
     this.server = this.serversService.getServer(1);
