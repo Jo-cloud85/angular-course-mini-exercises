@@ -40,6 +40,10 @@ export class RecipeService {
         return this.recipes.slice();
     }
 
+    getRecipeById(id: number) {
+        return this.recipes[id];
+    }
+
     // This mtd allows duplicates which is not correct
     // addIngredientsToShoppingList(ingredients: Ingredient[]) {
     //     this.slService.addIngredients(ingredients);
