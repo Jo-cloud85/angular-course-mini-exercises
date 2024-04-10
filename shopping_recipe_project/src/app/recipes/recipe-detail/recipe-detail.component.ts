@@ -14,7 +14,8 @@ export class RecipeDetailComponent implements OnInit {
 	id: number;
 
 	constructor(private recipeService: RecipeService,
-				private route: ActivatedRoute) {
+				private route: ActivatedRoute,
+				private router: Router) {
 	}
 
 	ngOnInit() {
@@ -25,6 +26,8 @@ export class RecipeDetailComponent implements OnInit {
 		to use. */
 		// const id = +this.route.snapshot.params['id'];
 
+		/* Actually, if you see the onEditRecipe() method below,  we don't need the ID here in this 
+		case. Why did I get it then? Well, simply for demo purposes. */
 		this.route.params
 			.subscribe((params: Params) => {
 				this.id = +params['id'];
@@ -35,5 +38,9 @@ export class RecipeDetailComponent implements OnInit {
 
 	onAddToShoppingList() {
 		this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+	}
+
+	onEditRecipe() {
+		this.router.navigate(['edit'], { relativeTo: this.route });
 	}
 }

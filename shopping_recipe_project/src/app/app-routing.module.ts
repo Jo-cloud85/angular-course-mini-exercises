@@ -6,9 +6,19 @@ import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { ShoppingEditComponent } from "./shopping-list/shopping-edit/shopping-edit.component";
 import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
 import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
+import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 
-/* Putting pathMatch: 'full' will override the default of prefix and says now only redirect
-if the full path is empty. */
+/* 
+Things to note:
+
+Putting pathMatch: 'full' will override the default of prefix and says now only redirect
+if the full path is empty. 
+
+Any routes with ':', have to come later. If we did not swope the 'new' and ':id', path, it'll try 
+to parse "new" as an ID because the route with the dynamic ID parameter comes before the route 
+definition where we have "new" hard coded into the path. 
+*/
+
 const appRoutes: Routes = [
     { 
         path: '', 
@@ -18,23 +28,19 @@ const appRoutes: Routes = [
     { 
         path: 'recipes', 
         component: RecipesComponent, 
-        children: [{
-            path: '',
-            component: RecipeStartComponent
-        },
-        {
-            path: ':id',
-            component: RecipeDetailComponent
-        }
-    ]   
+        children: [
+            { path: '', component: RecipeStartComponent },
+            { path: 'new', component: RecipeEditComponent },
+            { path: ':id', component: RecipeDetailComponent }, 
+            { path: ':id/edit', component: RecipeEditComponent },
+        ]   
     }, 
     { 
         path: 'shopping-list', 
         component: ShoppingListComponent, 
-        children: [{ 
-            path: ':id/edit', 
-            component: ShoppingEditComponent
-        }] 
+        children: [
+            { path: ':id/edit', component: ShoppingEditComponent}
+        ] 
     },
     // {
     //     path: 'servers',
