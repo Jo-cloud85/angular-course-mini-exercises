@@ -1,5 +1,7 @@
 <!-- <p>servers works!</p> -->
 <label>Server Name</label>
+
+<!-- //////////////////////////////////// -->
 <!-- Using event binding -->
 <!-- <input
     type="text"
@@ -7,12 +9,15 @@
     (input)="onUpdateServerName($event)"> -->
 
 <!-- Using two-way binding -->
+<!-- It triggers on the input event and update the value of the server name in our component
+automatically and it will also update the value of the input element. -->
 <input
     type="text"
     class="form-control"
     [(ngModel)]="serverName">
 
 <!-- <p>{{ serverName }}</p> -->
+<!-- //////////////////////////////////// -->
 
 <button 
     class="btn btn-primary" 
@@ -20,6 +25,7 @@
     (click)="onCreateServer()">
     Add Server
 </button>
+
 <!-- Using String interpolation -->
 <!-- <p>{{allowNewServer}}</p> -->
 
