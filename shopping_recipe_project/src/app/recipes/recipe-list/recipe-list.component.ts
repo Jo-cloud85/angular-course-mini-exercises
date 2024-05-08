@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 	styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  	recipes: Recipe[];
+  	recipes: Recipe[]; // declaring variable recipes to be an array of Recipe object
 
 	constructor(private recipeService: RecipeService,
 				private router: Router,

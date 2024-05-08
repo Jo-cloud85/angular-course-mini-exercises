@@ -7,18 +7,19 @@
         <!-- <input type="text" class="form-control" [(ngModel)]="newServerName"> -->
 
         <!-- Using local reference -->
-        <!-- It is a nice feature to get access to some elements in your template and then use that either directly in the template or you could also output the server name
-        input value -->
+        <!-- It is a nice feature to get access to some elements in your template and then use that either directly 
+        in the template or you could also output the server name input value -->
         <input 
             type="text" 
             class="form-control" 
             #serverNameInput
         >
         <label>Server Content</label>
-         <!-- Using two-way binding -->
+        <!-- Using two-way binding -->
         <!-- <input type="text" class="form-control" [(ngModel)]="newServerContent"> -->
 
-         <!-- Using local reference -->
+        <!-- Using local reference -->
+        <!-- This one we use @ViewChild in the ts file to get access to #serverContentInput before we call a method -->
         <input 
             type="text" 
             class="form-control" 
@@ -28,10 +29,10 @@
         <!-- If you use local reference, then you need to put in the reference inside
         you methods, in this case onAddServer(serverNameInput) -->
         <button
-        class="btn btn-primary"
-        (click)="onAddServer(serverNameInput)">Add Server</button>
+            class="btn btn-primary"
+            (click)="onAddServer(serverNameInput)">Add Server</button>
         <button
-        class="btn btn-primary"
-        (click)="onAddBlueprint(serverNameInput)">Add Server Blueprint</button>
+            class="btn btn-primary"
+            (click)="onAddBlueprint(serverNameInput)">Add Server Blueprint</button>
     </div>
 </div>

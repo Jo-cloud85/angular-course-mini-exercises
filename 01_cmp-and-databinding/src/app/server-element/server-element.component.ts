@@ -1,4 +1,18 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, ContentChild, DoCheck, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { 
+    AfterContentChecked, 
+    AfterContentInit, 
+    AfterViewChecked, 
+    AfterViewInit, 
+    Component, 
+    ContentChild, 
+    DoCheck, 
+    ElementRef, 
+    Input, 
+    OnChanges, 
+    OnDestroy, 
+    OnInit, 
+    SimpleChanges, 
+    ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -17,19 +31,14 @@ export class ServerElementComponent implements
   // By default, all properties of components are only accessible inside these components
   // You have to be explicit about the properties you want to expose to the outside world
   // You want the parent components, in this case app.component, to be able to bind to this property, you need to add @Input().
-  @Input('srvElement')
-  element: {type: string, name: string, content:string};
+  @Input('srvElement') element: {type: string, name: string, content:string};
 
-  @Input()
-  name: string;
+  @Input() name: string;
 
-  @ViewChild('heading', {static:true})
-  header: ElementRef;
+  @ViewChild('heading', {static:true}) header: ElementRef;
 
   /* This is to get access to content which is stored in another component but then passed on via ng-content. */
-  @ContentChild('contentParagraph', {static: true})
-  paragraph: ElementRef;
-
+  @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef;
 
   // Understanding component lifecycle
   // Get called 1st
@@ -39,16 +48,16 @@ export class ServerElementComponent implements
 
   // Get called 2nd
   ngOnChanges(changes: SimpleChanges): void {
-      console.log('2. ngOnChanges is called');
-      // this will be the 'element' object above that we created at the start
-      console.log(changes); 
+    console.log('2. ngOnChanges is called');
+    // this will be the 'element' object above that we created at the start
+    console.log(changes); 
   }
 
   // Get called 3rd
   ngOnInit(): void {
-      console.log('3. ngOnInit is called');
-      console.log('>>> Text content: ' + this.header.nativeElement.textContent);
-      console.log('>>>>>>> Text content of paragraph: ' + this.paragraph.nativeElement.textContent);
+    console.log('3. ngOnInit is called');
+    console.log('>>> Text content: ' + this.header.nativeElement.textContent);
+    console.log('>>>>>>> Text content of paragraph: ' + this.paragraph.nativeElement.textContent);
   }
 
   // Get called 4th
