@@ -7,6 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class EvenComponent {
   // We use @Input() since the data should be passed from outside into this component
-  @Input() 
-  number: number;
+  @Input() number: number;
 }
