@@ -1,6 +1,8 @@
 import { LoggingService } from './logging.service';
 import { EventEmitter, Injectable } from "@angular/core";
 
+/* You use @Injectable when you want to inject a service into another service but technically 
+you can still add this decorator even if you not doing so. */
 @Injectable({providedIn: 'root'}) // new syntax
 export class AccountsService {
   accounts = [

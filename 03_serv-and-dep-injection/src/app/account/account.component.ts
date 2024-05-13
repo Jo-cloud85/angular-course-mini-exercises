@@ -1,7 +1,7 @@
 import { Component, Input} from '@angular/core';
 
-import { LoggingService } from '../logging.service';
-import { AccountsService } from '../accounts.service';
+import { LoggingService } from '../shared/logging.service';
+import { AccountsService } from '../shared/accounts.service';
 
 @Component({
   selector: 'app-account',
@@ -25,9 +25,7 @@ export class AccountComponent {
   /* So now we are not building any chain of property and event binding. We still
   have cross component communication through a service with the event emitter. */
 
-  constructor(private accountsService: AccountsService) {
-
-  }
+  constructor(private accountsService: AccountsService) {}
 
   onSetTo(status: string) {
     this.accountsService.updateStatus(this.id, status);
