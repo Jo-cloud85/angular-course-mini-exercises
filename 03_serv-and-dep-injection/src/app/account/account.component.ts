@@ -10,8 +10,12 @@ import { AccountsService } from '../shared/accounts.service';
   // providers: [LoggingService]
 })
 export class AccountComponent {
-  @Input() account: {name: string, status: string};
-  @Input() id: number;
+  @Input() account: {name: string, status: string} = {
+    name: 'Another Test Account',
+    status: 'active'
+  };
+
+  @Input() id: number = 0;
 
   // constructor(private loggingService: LoggingService,
   //             private accountsService: AccountsService) {}

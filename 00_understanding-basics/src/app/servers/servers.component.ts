@@ -6,11 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './servers.component.css'
 })
 export class ServersComponent {
-  allowNewServer=false;
-  serverCreationStatus='No server was created!'
-  serverName='';
-  serverCreated=false;
-  servers=['Testserver', 'Testserver 2']
+  allowNewServer: boolean = false;
+  serverCreationStatus: string = 'No server was created!'
+  serverName: string = '';
+  serverCreated: boolean = false;
+  servers: string[] =['Testserver', 'Testserver 2']
 
   constructor() {
     setTimeout(()=>{

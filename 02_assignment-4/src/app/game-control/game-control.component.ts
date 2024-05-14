@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-game-control',
@@ -6,7 +7,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./game-control.component.css']
 })
 export class GameControlComponent {
-  @Output() intervalFired = new EventEmitter<number>();
+  // @Output() intervalFired = new EventEmitter<number>();
+  @Output() intervalFired = new Subject<number>(); //use Subject is better than EventEmitter
 
   interval: any;
   
@@ -14,7 +16,7 @@ export class GameControlComponent {
 
   onStartGame() {
     this.interval = setInterval(() => {
-      this.intervalFired.emit(this.lastNumber + 1);
+      this.intervalFired.next(this.lastNumber + 1); // if you use Subject, then use next() instead of emit()
       this.lastNumber++;
     }, 1000);
   }

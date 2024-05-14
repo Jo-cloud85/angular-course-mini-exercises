@@ -8,7 +8,7 @@ import { UserService } from '../users.service';
   styleUrls: ['./inactive-users.component.css']
 })
 export class InactiveUsersComponent implements OnInit {
-  users: string[];
+  users: string[] = [];
 
   constructor(private userService: UserService) {}
 

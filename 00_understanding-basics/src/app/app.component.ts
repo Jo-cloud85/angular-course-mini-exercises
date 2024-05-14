@@ -6,14 +6,14 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = '00_understanding-basics';
+  title: string = '00_understanding-basics';
 
   // For assignment 2
-  username = '';
+  username: string = '';
 
   // For assignment 3
-  showSecret = false;
-  log = [];
+  showSecret: boolean = false;
+  log: any = [];
 
   onToggleDetails() {
     this.showSecret = !this.showSecret;

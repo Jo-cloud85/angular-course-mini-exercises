@@ -13,6 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private accountsService: AccountsService) {}
 
   ngOnInit() {
-      this.accounts = this.accountsService.accounts;
+    this.accounts = this.accountsService.accounts;
   }
 }
