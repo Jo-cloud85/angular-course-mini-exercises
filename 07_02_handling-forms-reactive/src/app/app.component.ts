@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   genders = ['Male', 'Female'];
-  signupForm: FormGroup;
-  hobbiesArray: FormArray; // used for Method 2
-  forbiddenUsernames = ['Chris', 'Anna'];
+  signupForm: FormGroup = {} as FormGroup;
+  hobbiesArray: FormArray = {} as FormArray; // used for Method 2
+  forbiddenUsernames: string[] = ['Chris', 'Anna'];
 
   // Method 1 ----------------------------
   // ngOnInit(): void {
@@ -87,17 +87,27 @@ export class AppComponent implements OnInit {
     return (<FormArray>this.signupForm.get('hobbies')).controls;
   }
 
-  // Creating custom validator
-  forbiddenNames(control: FormControl): {[s: string] : boolean} {
-    // -1 means true
-    if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
-      return {'nameIsForbidden':true};
+  // Creating custom validator - Version 1
+  // forbiddenNames(control: FormControl): {[s: string] : boolean} {
+  //   // -1 means true
+  //   if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
+  //     return {'nameIsForbidden':true};
+  //   }
+  //   return null; //DON'T return {'nameIsForbidden':false}. It should be null or simply omit the return
+  // }
+
+  // Creating custom validator - Version 2
+  /* Use AbstractControl instead of FormControl for better flexibility. This allows your validator to be used 
+  with other types of form controls like FormGroup and FormArray */
+  forbiddenNames(control: AbstractControl): ValidationErrors | null {
+    if (control && control.value && this.forbiddenUsernames.includes(control.value)) {
+      return { nameIsForbidden: true };
     }
-    return null; //DON'T return {'nameIsForbidden':false}. It should be null or simply omit the return
+    return null;
   }
 
-  // Creating custom async validator
-  forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+  // Creating custom async validator - I used AbstractControl instead of FormControl
+  forbiddenEmails(control: AbstractControl): Promise<any> | Observable<any> {
     const promise = new Promise<any>((resolve, reject) => {
       setTimeout(() => {
         if (control.value === 'test@test.com') {
@@ -115,10 +125,12 @@ export class AppComponent implements OnInit {
       let formData = "";
       Object.keys(formGroup.controls).forEach(key => {
           const control = formGroup.get(key);
-          if (control instanceof FormGroup || control instanceof FormArray) {
+          if (control !== null) {
+            if (control instanceof FormGroup || control instanceof FormArray) {
               formData += `${key}: \n${this.printFormGroupValue(control)}\n`;
-          } else {
-              formData += `${key}: ${control.value}\n`;
+            } else {
+                formData += `${key}: ${control.value}\n`;
+            }
           }
       });
       return formData;
