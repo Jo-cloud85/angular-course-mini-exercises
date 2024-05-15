@@ -21,7 +21,7 @@ export class CockpitComponent {
   // newServerContent = '';
 
   @ViewChild('serverContentInput', {static: true}) // links to the html
-  serverContentInput: ElementRef;
+  serverContentInput !: ElementRef;
 
   
   /* With the 2 methods below, we are emitting our own events and passing the data. By adding the @Output() 

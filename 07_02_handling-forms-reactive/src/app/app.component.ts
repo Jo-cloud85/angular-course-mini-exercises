@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   genders = ['Male', 'Female'];
-  signupForm: FormGroup = {} as FormGroup;
-  hobbiesArray: FormArray = {} as FormArray; // used for Method 2
+  signupForm!: FormGroup;
+  hobbiesArray!: FormArray; // used for Method 2
   forbiddenUsernames: string[] = ['Chris', 'Anna'];
 
   // Method 1 ----------------------------
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signupForm.value);
+    // console.log(this.signupForm.value);
     let formData = this.printFormGroupValue(this.signupForm); // See below for printFormGroupValue method
     alert(formData);
     this.hobbiesArray.clear(); // you have to clear the array manually
@@ -122,18 +122,18 @@ export class AppComponent implements OnInit {
 
   // Just a helper method for printing data
   printFormGroupValue(formGroup: FormGroup | FormArray): string {
-      let formData = "";
-      Object.keys(formGroup.controls).forEach(key => {
-          const control = formGroup.get(key);
-          if (control !== null) {
-            if (control instanceof FormGroup || control instanceof FormArray) {
-              formData += `${key}: \n${this.printFormGroupValue(control)}\n`;
-            } else {
-                formData += `${key}: ${control.value}\n`;
-            }
-          }
-      });
-      return formData;
+    let formData = "";
+    Object.keys(formGroup.controls).forEach(key => {
+      const control = formGroup.get(key);
+      if (control !== null) {
+        if (control instanceof FormGroup || control instanceof FormArray) {
+          formData += `${key}: \n${this.printFormGroupValue(control)}\n`;
+        } else {
+            formData += `${key}: ${control.value}\n`;
+        }
+      }
+    });
+    return formData;
   }
 }
 

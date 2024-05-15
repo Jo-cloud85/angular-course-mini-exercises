@@ -21,7 +21,7 @@
 							id="firstname"
 							formControlName="firstname"
 						>
-						<div *ngIf="signupForm.get('username.firstname').touched && signupForm.get('username.firstname').invalid">
+						<div *ngIf="signupForm.get('username.firstname')?.touched && signupForm.get('username.firstname')?.invalid">
 							<small 
 								class="form-text text-danger"
 								*ngIf="signupForm.get('username.firstname').errors['required']">
@@ -29,7 +29,7 @@
 							</small>
 							<small 
 								class="form-text text-danger"
-								*ngIf="signupForm.get('username.firstname').errors['minLength']">
+								*ngIf="signupForm.get('username.firstname').errors['minlength']">
 								First name must be minimally 3 characters long
 							</small>
 							<small 
@@ -47,7 +47,7 @@
 							id="lastname"
 							formControlName="lastname"
 						>
-						<div *ngIf="signupForm.get('username.lastname').touched && signupForm.get('username.lastname').invalid">
+						<div *ngIf="signupForm.get('username.lastname')?.touched && signupForm.get('username.lastname')?.invalid">
 							<small 
 								class="form-text text-danger"
 								*ngIf="signupForm.get('username.lastname').hasError('required')">
@@ -72,12 +72,12 @@
 					>
 					<small 
 						class="form-text text-danger"
-						*ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('required')">
+						*ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.hasError('required')">
 						Please enter your email
 					</small>
 					<small 
 						class="form-text text-danger"
-						*ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('email')">
+						*ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.hasError('email')">
 						Please enter a valid email
 					</small>
 				</div>
