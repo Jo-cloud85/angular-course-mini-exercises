@@ -12,16 +12,14 @@ export class CockpitComponent {
   And to make them events, we have to assign a new value to these properties i.e. new EventEmitter. And new 
   EventEmitter is a generic type and we add () at the end, to call the constructor to create a new 
   EventEmitter object. */
-  @Output()
-  serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
-  @Output('bpCreated') // adding alias - optional
-  blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+  @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+  @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
   // once you use local reference and pass in a parameter into your methods, you don't need this variable anymore
   // newServerName = ''; 
   // newServerContent = '';
 
-  @ViewChild('serverContentInput', {static: true}) // links to the html
-  serverContentInput !: ElementRef;
+  // links to the cockpit.component.html
+  @ViewChild('serverContentInput', {static: true}) serverContentInput !: ElementRef;
 
   
   /* With the 2 methods below, we are emitting our own events and passing the data. By adding the @Output() 
