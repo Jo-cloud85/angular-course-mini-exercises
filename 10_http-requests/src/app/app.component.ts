@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { PostsService } from './posts.service';
 import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -58,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
             this.isFetching=false;
             this.loadedPosts=posts;
           },
-          error: (error: any) => {
+          error: (error: HttpErrorResponse) => {
             this.isFetching=false;
             this.error=error.message;
           },
