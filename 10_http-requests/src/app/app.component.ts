@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   loadedPosts: Post[] = [];
   error:string = '';
   private errorSub !: Subscription;
+  private sub !: Subscription;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -50,16 +51,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private fetchAndSubscribe(): void {
-    this.postSvc.fetchPosts().subscribe(
-      posts => {
-        this.isFetching=false;
-        this.loadedPosts=posts;
-      }, 
-      error => {
-        this.isFetching=false;
-        this.error=error.message;
-      }
-    );
+    this.sub = this.postSvc.fetchPosts()
+      .subscribe(
+        {
+          next: (posts: Post[]) => {
+            this.isFetching=false;
+            this.loadedPosts=posts;
+          },
+          error: (error: any) => {
+            this.isFetching=false;
+            this.error=error.message;
+          },
+          complete: () => {
+            this.sub.unsubscribe();
+          }
+        }
+      );
   }
 
   onHandleError() {

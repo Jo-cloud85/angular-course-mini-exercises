@@ -3,7 +3,7 @@ import { Post, ResponseData } from "./post.model";
 import { AbstractControl } from "@angular/forms";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { map, catchError } from 'rxjs/operators';
-import { Observable, Subject, throwError } from "rxjs";
+import { Observable, Subject, Subscription, throwError } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
@@ -11,9 +11,9 @@ export class PostsService {
   firebaseURL: string = 'https://ng-backend-6367e-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json';
 
   error = new Subject<string>();
+  private sub !: Subscription;
 
-  constructor(
-    private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   /* Note that Http requests are also managed via observables thats why we can wrap the Http requests
   and we can then subscribe to them to get informed about the response and to handle errors and so on.
@@ -23,14 +23,19 @@ export class PostsService {
   So here, the post request returns an observable that wraps our request and to get access to the response,
   you have to call subscribe and then can you get your response data. */
 
-  createAndStorePosts(ctrl: AbstractControl){
+  createAndStorePosts(ctrl: AbstractControl): void {
     if (ctrl.value) {
-      this.http
-        .post<Post>(this.firebaseURL, ctrl.value, {observe: 'response'})
-        .subscribe(responseData => {
-          console.log(responseData);
-        }, err => {
-          this.error.next(err.message);
+      const postData: Post = ctrl.value;
+
+      this.sub = this.http
+        .post<ResponseData>(this.firebaseURL, postData, { observe: 'response' })
+        .subscribe({
+          next: (response) => {
+            console.log(response.body);
+          },
+          error: (err) => {
+            this.error.next(err.message);
+          }
         });
     }
   }
