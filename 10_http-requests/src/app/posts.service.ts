@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Post, ResponseData } from "./post.model";
 import { AbstractControl } from "@angular/forms";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { map, catchError } from 'rxjs/operators';
 import { Observable, Subject, Subscription, throwError } from "rxjs";
 
@@ -33,7 +33,7 @@ export class PostsService {
           next: (response) => {
             console.log(response.body);
           },
-          error: (err) => {
+          error: (err: HttpErrorResponse) => {
             this.error.next(err.message);
           }
         });
@@ -63,8 +63,8 @@ export class PostsService {
           }
           return postsArray;
         }),
-        catchError(errorRes => {
-          return throwError(() => new Error(errorRes));
+        catchError((errorRes: HttpErrorResponse) => {
+          return throwError(() => new Error(errorRes.message));
         })
       )
   }
