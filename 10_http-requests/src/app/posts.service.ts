@@ -47,9 +47,9 @@ export class PostsService {
   but in this case, we do the subscribe inside app.component.ts because of of the 2 variables
   isFetching and loadedPosts. */
   fetchPosts(): Observable<any> {
-    let searchParams=new HttpParams();
-    searchParams=searchParams.append('print', 'pretty');
-    searchParams=searchParams.append('custom', 'key');
+    let searchParams=new HttpParams()
+      .set('print', 'pretty')
+      .set('custom', 'key');
 
     return this.http
       .get<ResponseData>(this.firebaseURL, {
