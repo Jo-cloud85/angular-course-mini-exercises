@@ -11,15 +11,14 @@
                 fragment="loading"
                 href="#"
                 class="list-group-item"
-                *ngFor="let server of servers">
-                {{ server.name }}
+                *ngFor="let server of servers">{{ server.name }}
             </a>
         </div>
     </div>
     <div class="col-xs-12 col-sm-4">
-        <!-- Now that we have child routes, we have to add this router-outlet here that adds a 
-        new hook which will be used on all child routes off the route being loaded on the service
-        component. So all child routes will be loaded in this router out of place now. -->
+        <!-- Now that we have child routes, we have to add this router-outlet here that adds a new hook which will be 
+        used on all child routes off the route being loaded on the service component. So all child routes will be loaded 
+        in this router out of place now. -->
         <router-outlet></router-outlet>
         <!-- <app-edit-server></app-edit-server>
         <hr>

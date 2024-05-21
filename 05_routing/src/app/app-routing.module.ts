@@ -47,17 +47,16 @@ const appRoutes: Routes = [
         component: ErrorPageComponent,
         data: {message: 'Page not found!'}
     },
-    { path: '**', redirectTo: '/not-found' }
+    { 
+        path: '**', 
+        redirectTo: '/not-found' 
+    }
 ]
 
 // We need exports because we need to outsource all the above routes
 @NgModule({
-    imports: [
-        RouterModule.forRoot(appRoutes)
-    ],
-    exports: [
-        RouterModule
-    ]
+    imports: [RouterModule.forRoot(appRoutes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
 

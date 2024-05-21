@@ -1,42 +1,42 @@
 <div class="container mt-5 d-flex flex-column gap-3">
     <div class="row">
         <div class="col-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-        <ul class="nav nav-tabs">
-            <li 
-                class="nav-item" 
-                role="presentation" 
-                routerLinkActive="active" 
-                [routerLinkActiveOptions]="{ exact: true }"
-            >
-                <a class="nav-link" routerLink="/">Home</a>
-            </li>
-            <li 
-                class="nav-item" 
-                role="presentation" 
-                routerLinkActive="active"
-            >
-                <a class="nav-link" routerLink="/servers">Servers</a>
-            </li>
-            <li 
-                class="nav-item" 
-                role="presentation" 
-                routerLinkActive="active"
-            >
-                <a class="nav-link" routerLink="/users">Users</a>
-            </li>
-            <!-- Another way of writing routerLink - using property binding -->
-            <!-- <li class="nav-item" role="presentation">
-                <a class="nav-link" [routerLink]="['/users']">Users</a>
-            </li> -->
-        </ul>
+            <ul class="nav nav-tabs">
+                <li 
+                    class="nav-item" 
+                    role="presentation" 
+                    routerLinkActive="active" 
+                    [routerLinkActiveOptions]="{ exact: true }"
+                >
+                    <a class="nav-link" routerLink="/">Home</a>
+                </li>
+                <li 
+                    class="nav-item" 
+                    role="presentation" 
+                    routerLinkActive="active"
+                >
+                    <a class="nav-link" routerLink="/servers">Servers</a>
+                </li>
+                <li 
+                    class="nav-item" 
+                    role="presentation" 
+                    routerLinkActive="active"
+                >
+                    <a class="nav-link" routerLink="/users">Users</a>
+                </li>
+                <!-- Another way of writing routerLink - using property binding -->
+                <!-- <li class="nav-item" role="presentation">
+                    <a class="nav-link" [routerLink]="['/users']">Users</a>
+                </li> -->
+            </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-        <!-- This marks the place in our doc where we want the Angular router to load the component of the currently
-        selected route. Rmb, in app-routing.module.ts, under const appRoutes: Routes[{}], we already list down our
-        paths and the components we want to link/navigate to. -->
-        <router-outlet></router-outlet>
+            <!-- This marks the place in our doc where we want the Angular router to load the component of the currently
+            selected route. Rmb, in app-routing.module.ts, under const appRoutes: Routes[{}], we already list down our
+            paths and the components we want to link/navigate to. -->
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>
