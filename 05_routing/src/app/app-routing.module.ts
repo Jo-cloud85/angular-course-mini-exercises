@@ -63,9 +63,9 @@ export class AppRoutingModule { }
 
 /*
 In our example, we didn't encounter any issues when we tried to redirect the user. But that's not always 
-the case when adding redirections.
+the case when adding re-directions.
 
-By default, Angular matches paths by prefix. That means, that the following route will match both /recipes  
+By default, Angular matches paths by prefix. That means that the following route will match both /recipes  
 and just / 
 { path: '', redirectTo: '/somewhere-else' } 
 

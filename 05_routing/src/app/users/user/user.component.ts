@@ -21,9 +21,8 @@ export class UserComponent implements OnInit {
       name: this.route.snapshot.params['name']
     }
     /* This will update our user object whenever the parameter changes, and only when it changes. 
-    Nothing will happen except just setting up the subscription when the ngOnInit() is first invoked. */
-    this.route.params.subscribe(
-      (params: Params) => {
+    Nothing will happen except just setting up the subscription when the ngOnInit() is first invoked.*/
+    this.route.params.subscribe((params: Params) => {
         this.user.id=params['id'];
         this.user.name=params['name'];
       }
@@ -34,8 +33,8 @@ export class UserComponent implements OnInit {
 /*
 More on the params.subscribe() method 
 If you know that the component you're on may never be reloaded from within that component as we're 
-doing it here, then you might not need this, this addition. You might simply use the snapshot
-because if you know your component will 100% of the time be recreated when it is reached, because 
-there's no other way of reaching it, there is no way of reaching it while it's being on that 
+doing it here, then you might not need this route.params.subscribe() addition. You might simply use the 
+snapshot because if you know your component will 100% of the time be recreated when it is reached, 
+because there's no other way of reaching it, there is no way of reaching it while it's being on that 
 component, if you know that, you don't need to subscribe.
 */

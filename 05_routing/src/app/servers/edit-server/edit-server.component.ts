@@ -5,7 +5,6 @@ import { ServersService } from '../servers.service';
 import { CanComponentDeactivate } from './can-deactivate-guard.service';
 import { Observable } from 'rxjs';
 
-
 @Component({
 	selector: 'app-edit-server',
 	templateUrl: './edit-server.component.html',
@@ -19,38 +18,33 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
 	changesSaved = false;
 
 	constructor(private serversService: ServersService,
-							private route: ActivatedRoute,
-							private router: Router) { }
+              private route: ActivatedRoute,
+              private router: Router) {}
 
 	ngOnInit() {
-		/* This is only run or updated at the time this component is created. So if there is a chance 
-		of changing your queryParam from the page you're currently on you might not want to use this 
-		approach because it won't be reactive, it won't display or allow you to react to any changes 
-		which have after this component has been loaded. */
-		console.log(this.route.snapshot.queryParams);
-		console.log(this.route.snapshot.fragment);
+		/* This is only run or updated at the time this component is created. So if there is a chance of changing of
+		your queryParam from the page you're currently on you might not want to use this approach because it won't be
+		reactive, it won't display or allow you to react to any changes after this component has been loaded. */
+		// console.log(this.route.snapshot.queryParams);
+		// console.log(this.route.snapshot.fragment);
 
-		/* The alternative of course, is to use the route and have queryParam and fragment as an 
-		observable and subscribe to them respectively. This will allow you to react to react to 
-		change in query parameters. */
-		this.route.queryParams
-			.subscribe(
-				(queryParams: Params) => {
-					this.allowEdit = queryParams['allowEdit'] === '1' ? true : false;
-				}
+		/* The alternative, of course, from the above 2 lines of code, is to use the route and have queryParam and
+		fragment as an observable and subscribe to them respectively. This will allow you to react to react to change
+		in query parameters. */
+		this.route.queryParams.subscribe((queryParams: Params) => {
+				this.allowEdit = queryParams['allowEdit'] === '1' ? true : false; //?allowEdit=edit
+			}
 		);
-		this.route.fragment.subscribe();
+		this.route.fragment.subscribe(); //#loading
 
 		// Rmb the '+' is the convert the string to number
 		const id = +this.route.snapshot.params['id'];
 		this.server = this.serversService.getServer(id);
-		// Subscribe route params to update the id if params change
-		this.route.params
-		.subscribe(
-			(params: Params) => {
-				this.server = this.serversService.getServer(+params['id']);
+		// Subscribe route params to update the id if params change. Rmb to add the '+' to convert it to number
+		this.route.params.subscribe((params: Params) => {
+				this.server = this.serversService.getServer(+params['id']); //10/Anna i.e. :id/:name
 			}
-	)
+		)
 		this.serverName = this.server.name;
 		this.serverStatus = this.server.status;
 	}
@@ -58,11 +52,11 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
 	onUpdateServer() {
 		this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
 		this.changesSaved = true;
-		this.router.navigate(['../'], { relativeTo: this.route });
+		this.router.navigate(['../'], { relativeTo: this.route }); 
 	}
 
-	/* We now provide the logic on deciding whether we are allowed to leave or not. This logic will be
-	run whenever the canDeactivateGuard is checked by the @angular/router. */
+	/* We now provide the logic on deciding whether we are allowed to leave or not. This logic will be run
+	whenever the canDeactivateGuard is checked by the @angular/router. */
 	canDeactivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		if (!this.allowEdit) {
 			return true;

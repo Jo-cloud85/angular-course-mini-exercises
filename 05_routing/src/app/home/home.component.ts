@@ -10,16 +10,20 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   constructor(private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService) {}
 
   ngOnInit() {
   }
 
+  // You have to pass an array when using navigate()
   /* So basically you have 2 ways of adding query parameters and fragments to our route. 
     - via routerLink as seen in servers.component.html 
-    - via router.navigate as demonstarted below. */
+    - via router.navigate as demonstrated below. */
   onLoadServer(id: number) {
-    this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit:'1'}, fragment: 'loading'});
+    this.router.navigate(
+      ['/servers', id, 'edit'], 
+      {queryParams: {allowEdit:'1'}, fragment: 'loading'}
+    );
   }
 
   onLogin() {
