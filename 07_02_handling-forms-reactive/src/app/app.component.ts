@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { forbiddenEmails, forbiddenNames } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,6 @@ export class AppComponent implements OnInit {
   genders = ['Male', 'Female'];
   signupForm!: FormGroup;
   hobbiesArray!: FormArray; // used for Method 2
-  forbiddenUsernames: string[] = ['Chris', 'Anna'];
 
   // Method 1 ----------------------------
   // ngOnInit(): void {
@@ -34,12 +33,12 @@ export class AppComponent implements OnInit {
     this.signupForm = this.fb.group({
       username: this.fb.group({
         firstname: this.fb.control<string>(
-          '', [Validators.required, Validators.minLength(3), this.forbiddenNames.bind(this)]),
+          '', [Validators.required, Validators.minLength(3), forbiddenNames]),
         lastname: this.fb.control<string>(
           '', [Validators.required, Validators.minLength(3)])
       }),
       email: this.fb.control<string>(
-        '', [Validators.required, Validators.email], this.forbiddenEmails),
+        '', [Validators.required, Validators.email], forbiddenEmails),
       gender: this.fb.control<string>('Male'),
       hobbies: this.hobbiesArray
     })
@@ -79,6 +78,7 @@ export class AppComponent implements OnInit {
   }
 
   onAddHobby() {
+    // each control is the new hobby
     const control = new FormControl(null, Validators.required);
     (<FormArray>this.signupForm.get('hobbies')).push(control);
   }
@@ -86,40 +86,7 @@ export class AppComponent implements OnInit {
   getControls() {
     return (<FormArray>this.signupForm.get('hobbies')).controls;
   }
-
-  // Creating custom validator - Version 1
-  // forbiddenNames(control: FormControl): {[s: string] : boolean} {
-  //   // -1 means true
-  //   if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
-  //     return {'nameIsForbidden':true};
-  //   }
-  //   return null; //DON'T return {'nameIsForbidden':false}. It should be null or simply omit the return
-  // }
-
-  // Creating custom validator - Version 2
-  /* Use AbstractControl instead of FormControl for better flexibility. This allows your validator to be used 
-  with other types of form controls like FormGroup and FormArray */
-  forbiddenNames(control: AbstractControl): ValidationErrors | null {
-    if (control && control.value && this.forbiddenUsernames.includes(control.value)) {
-      return { nameIsForbidden: true };
-    }
-    return null;
-  }
-
-  // Creating custom async validator - I used AbstractControl instead of FormControl
-  forbiddenEmails(control: AbstractControl): Promise<any> | Observable<any> {
-    const promise = new Promise<any>((resolve, reject) => {
-      setTimeout(() => {
-        if (control.value === 'test@test.com') {
-          resolve({'emailIsForbidden': true});
-        } else {
-          resolve(null);
-        }
-      }, 1500);
-    });
-    return promise;
-  }
-
+  
   // Just a helper method for printing data
   printFormGroupValue(formGroup: FormGroup | FormArray): string {
     let formData = "";
@@ -136,13 +103,3 @@ export class AppComponent implements OnInit {
     return formData;
   }
 }
-
-// ------------------------------------------------------------------------------------------------------
-// const forbiddenUsernames = ['Chris', 'Anna'];
-
-// const forbiddenNames = (control: AbstractControl) => {
-//   if (forbiddenUsernames.indexOf(control.value)) {
-//     return {'nameIsForbidden':true} as ValidationErrors;
-//   }
-//   return (null); //DON'T return {'nameIsForbidden':false}. It should be null or simply omit the return
-// }
