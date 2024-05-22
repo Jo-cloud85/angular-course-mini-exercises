@@ -6,7 +6,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-12">
-			<!-- This button is just for demonstrating component lifecycle -->
+			<!-- These 2 buttons are just for demonstrating component lifecycle -->
 			<button class="btn btn-primary" (click)="onChangeFirst()">Change first element</button>
 			<button class="btn btn-danger" (click)="onDestroyFirst()">Destroy first component</button>
 
@@ -16,13 +16,13 @@
 				[name]="serverElement.name"
 			>
 				<!-- With ng-content in server-element.component.html, this p tag content will be
-				projected into the server element component. -->
+				projected into the server-element component. -->
 				<p #contentParagraph>
-				<strong 
-					*ngIf="serverElement.type === 'server'" 
-					style="color: red">{{ serverElement.content }}
-				</strong>
-				<em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+					<strong 
+						*ngIf="serverElement.type === 'server'" 
+						style="color: red">{{ serverElement.content }}
+					</strong>
+					<em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
 				</p>
 			</app-server-element>
 		</div>

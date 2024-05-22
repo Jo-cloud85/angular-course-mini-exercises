@@ -23,5 +23,4 @@ export class ServersComponent implements OnInit {
     // Does not work because of the 2nd parameter
     // this.router.navigate(['servers'], { relativeTo: this.route })
   }
-
 }

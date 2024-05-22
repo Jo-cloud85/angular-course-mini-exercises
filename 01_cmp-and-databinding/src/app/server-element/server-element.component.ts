@@ -28,23 +28,30 @@ export class ServerElementComponent implements
   AfterViewInit,
   AfterViewChecked,
   OnDestroy {
-  // By default, all properties of components are only accessible inside these components
-  // You have to be explicit about the properties you want to expose to the outside world
-  // You want the parent components, in this case app.component, to be able to bind to this property, you need to add @Input().
+
+  /* By default, all properties of components are only accessible inside these components. You have to be explicit 
+  about the properties you want to expose to the outside world. You want the parent component, in this case,
+  app.component, to be able to bind to this property, you need to add @Input(). */
+
+  // Method 1
+  // So this 'element' comes from app component
   @Input('srvElement') element: {type: string, name: string, content:string} = {
     type: 'server', 
     name: 'Testserver', 
     content: 'This is a test server'
   };
 
-  @Input() name: string = '';
+  // Method 2
+  // So this 'name' comes from app component
+  @Input() name: string = ''; 
 
-  @ViewChild('heading', {static:true}) header: ElementRef = {} as ElementRef;
+  @ViewChild('heading', {static:true}) header !: ElementRef;
 
   /* This is to get access to content which is stored in another component but then passed on via ng-content. */
-  @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef = {} as ElementRef;
+  @ContentChild('contentParagraph', {static: true}) paragraph !: ElementRef;
 
-  // Understanding component lifecycle
+  ////////////////////////////////////////////////////////////////////////////////
+  // Understanding component lifecycle 
   // Get called 1st -------------
   constructor() {
     console.log('1. constructor is called');
