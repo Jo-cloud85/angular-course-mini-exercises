@@ -17,25 +17,17 @@ export class AccountComponent {
 
   @Input() id: number = 0;
 
-  // constructor(private loggingService: LoggingService,
-  //             private accountsService: AccountsService) {}
+  constructor(private loggingService: LoggingService,
+              private accountsService: AccountsService) {}
 
-  // onSetTo(status: string) {
-  //   this.accountsService.updateStatus(this.id, status);
-  //   this.loggingService.logStatusChange(status);
-  // }
-
-
-  /* So now we are not building any chain of property and event binding. We still
-  have cross component communication through a service with the event emitter. */
-
-  constructor(private accountsService: AccountsService) {}
+  /* So now we are not building any chain of property and event binding. We still have cross
+  component communication through a service with new Subject in accounts.service.ts. */
 
   onSetTo(status: string) {
     this.accountsService.updateStatus(this.id, status);
-    /* Since we inject the accountsService here where we set the new status, and 
-    then call accountsService.statusUpdated.emit - we are emitting an event I set  
-    up in the service. */
-    this.accountsService.statusUpdated.emit(status);
+    /* Since we inject the accountsService here where we set the new status, and then call
+    accountsService.statusUpdated.next - we call next() on the Subject object I set up in the service. */
+    this.accountsService.statusUpdated.next(status);
+    this.loggingService.logStatusChange(status);
   }
 }

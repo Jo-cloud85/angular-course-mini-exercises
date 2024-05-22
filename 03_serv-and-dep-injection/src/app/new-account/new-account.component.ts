@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { AccountsService } from '../shared/accounts.service';
 import { LoggingService } from '../shared/logging.service';
 import { Component } from '@angular/core';
@@ -10,23 +11,19 @@ import { Component } from '@angular/core';
 })
 export class NewAccountComponent {
 
-  /* This informs Angular that we will need an instance of this LoggingService */
-  // constructor(private loggingService: LoggingService,
-  //             private accountsService: AccountsService) {}
+  private sub: Subscription;
 
-  // onCreateAccount(accountName: string, accountStatus: string) {
-  //   this.accountsService.addAccount(accountName, accountStatus);
-  //   this.loggingService.logStatusChange(accountStatus);
-  // }
-
-  constructor(private accountsService: AccountsService) {
-    this.accountsService.statusUpdated.subscribe(
-      (status: string) => alert('New Status: ' + status)
-    )
+  constructor(private accountsService: AccountsService,
+              private loggingService: LoggingService) {
+    this.sub = this.accountsService.statusUpdated.subscribe({
+      next: (status: string) => alert('New Status: ' + status),
+      error: (err: string) => alert('Error with adding new server' + err),
+      complete: () => this.sub.unsubscribe()
+    })
   }
 
   onCreateAccount(accountName: string, accountStatus: string) {
     this.accountsService.addAccount(accountName, accountStatus);
-    // this.accountsService.statusUpdated.emit(accountStatus);
+    this.loggingService.logStatusChange(accountStatus);
   }
 }

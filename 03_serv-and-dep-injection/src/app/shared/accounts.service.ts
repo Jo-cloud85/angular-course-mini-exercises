@@ -1,5 +1,6 @@
+import { Subject } from 'rxjs';
 import { LoggingService } from './logging.service';
-import { EventEmitter, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 /* You use @Injectable when you want to inject a service into another service but technically 
 you can still add this decorator even if you not doing so. */
@@ -20,7 +21,9 @@ export class AccountsService {
     }
   ];
 
-  statusUpdated = new EventEmitter<string>();
+  /* A Subject object returns an Observable which you can subscribe to it like we are using in new-account.component.ts
+  or simply just call on next() like in account.component.ts */
+  statusUpdated = new Subject<string>();
 
   constructor(private loggingService: LoggingService) {}
 
